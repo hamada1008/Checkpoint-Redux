@@ -8,9 +8,11 @@ const Task = (props) => {
 
 
     const edit = useSelector (state => state.togglerEdit)
-    const remove = useSelector (state => state.remover)
-    const added = useSelector( state => state.adder)
-    const done = useSelector(state => state.togglerDone)
+    // const remove = useSelector (state => state.remover)
+    // const added = useSelector( state => state.adder)
+    // const done = useSelector(state => state.togglerDone)
+    const items = useSelector(state => state.bigReducer)
+
 
     const dispatch = useDispatch()
 

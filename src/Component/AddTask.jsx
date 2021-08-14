@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useState} from 'react'
 import Task from "./Task"
 import { useSelector, useDispatch } from 'react-redux'
 import { addnote , filterminus,filterreset, removenote} from '../Redux/actions'
@@ -6,9 +6,11 @@ import tasklist from './ListTask'
 
 const AddTask = () => {
 
-    const added = useSelector (state => state.adder)
-    const remove = useSelector(state => state.remover)
-    const filt = useSelector (state => state.filtered)
+    // const added = useSelector (state => state.adder)
+    // const remove = useSelector(state => state.remover)
+    // const filt = useSelector (state => state.filtered)
+    const items = useSelector(state => state.bigReducer)
+    const [fillter,setFillter] = useState(false)
     const dispatch = useDispatch()
 
     
@@ -33,8 +35,8 @@ const AddTask = () => {
         
         switch (e.target.value) {
             
-            case "Done" :   dispatch(filterminus()); break;
-            case 'All':  dispatch(filterreset()); break;
+            case "Done" :  setFillter(true); break;
+            case 'All':  setFillter(false); break;
             default: 
         }
         
@@ -51,11 +53,15 @@ const AddTask = () => {
               <option value="All">All</option>
               <option value="Done">Done</option>
           </select>
-            {added.map(el => el.description !=="" &&   <Task 
+            {fillter ? items.filter (el => el.isDone=== true).map(el => el.description !=="" &&   <Task 
                                     id = {el.id}
                                     key={el.id}
                                     desc={el.description}
-                                    dn = {el.isDone} />)}  
+                                    dn = {el.isDone} />) : items.map(el => el.description !=="" &&   <Task 
+                                    id = {el.id}
+                                    key={el.id}
+                                    desc={el.description}
+                                    dn = {el.isDone} />) }   
         </div>
     )
 }
