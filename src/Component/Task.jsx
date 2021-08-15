@@ -1,16 +1,12 @@
 import React from 'react'
 import { useSelector , useDispatch} from 'react-redux'
 import {toggle2 , removenote,addnote , toggle} from '../Redux/actions'
-import tasklist from './ListTask'
 
 
 const Task = (props) => {
 
 
     const edit = useSelector (state => state.togglerEdit)
-    // const remove = useSelector (state => state.remover)
-    // const added = useSelector( state => state.adder)
-    // const done = useSelector(state => state.togglerDone)
     const items = useSelector(state => state.bigReducer)
 
 
@@ -20,18 +16,20 @@ const Task = (props) => {
 
     function unlist (e) {
         e.preventDefault()
+        console.log(e.target.contentEditable)
+        if (e.target.contentEditable == "false" ) {
         dispatch(toggle(props.id))
-        dispatch(addnote(''))
+        dispatch(addnote(''))    
     }
+}
 
  
     
-
-       
+ 
     
     function editTask (e) {
 
-        
+
         e.target.previousSibling.contentEditable = !edit
         dispatch(toggle2())
         e.target.previousSibling.focus() 
@@ -50,7 +48,6 @@ const Task = (props) => {
     function removeTask () {
        
         dispatch(removenote(props.id))
-        // dispatch(addnote(''))
 
     }
 

@@ -6,9 +6,6 @@ import tasklist from './ListTask'
 
 const AddTask = () => {
 
-    // const added = useSelector (state => state.adder)
-    // const remove = useSelector(state => state.remover)
-    // const filt = useSelector (state => state.filtered)
     const items = useSelector(state => state.bigReducer)
     const [fillter,setFillter] = useState(false)
     const dispatch = useDispatch()
@@ -45,7 +42,7 @@ const AddTask = () => {
 
     return (
         <div className="List">
-           
+           <header>
            <h1>To-Do-List</h1>
           <input type="text" placeholder="Add a task to do" onKeyPress={addtask2}/>
           <button className="addbtn" onClick={addtask}  >+</button>
@@ -53,6 +50,7 @@ const AddTask = () => {
               <option value="All">All</option>
               <option value="Done">Done</option>
           </select>
+          </header>
             {fillter ? items.filter (el => el.isDone=== true).map(el => el.description !=="" &&   <Task 
                                     id = {el.id}
                                     key={el.id}
