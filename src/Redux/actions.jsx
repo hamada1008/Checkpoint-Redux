@@ -39,28 +39,3 @@ export const removenote = (num) => {
     }
 }
 
-// export const filterr = () => {
-
-// return {
-//     type : actions.FILTER,
-
-// }
-
-
-export const filterminus = () => {
-
-    return {
-        type : actions.FILTERMINUS,
-    
-    }
-    
-    }
-export const filterreset = () => {
-
-        return {
-            type : actions.FILTERRESET,
-        
-        }
-        
-        }
-    

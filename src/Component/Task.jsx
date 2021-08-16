@@ -7,7 +7,6 @@ const Task = (props) => {
 
 
     const edit = useSelector (state => state.togglerEdit)
-    const items = useSelector(state => state.bigReducer)
 
 
     const dispatch = useDispatch()
@@ -24,8 +23,7 @@ const Task = (props) => {
 }
 
  
-    
- 
+
     
     function editTask (e) {
 

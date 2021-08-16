@@ -7,9 +7,8 @@ import {
 
 const AddTask = () => {
   const items = useSelector((state) => state.bigReducer);
-  const [fillter, setFillter] = useState(false);
+  const [fillter, setFillter] = useState("all");
   const dispatch = useDispatch();
-
   function addtask(e) {
     e.target.previousSibling.value !== "" &&
       dispatch(addnote(e.target.previousSibling.value));
@@ -23,19 +22,18 @@ const AddTask = () => {
   }
 
   function filterTask(e) {
+   
     switch (e.target.value) {
-      case "Done":
-        setFillter(true);
-        break;
-      case "All":
-        setFillter(false);
-        break;
+      case "Done":   setFillter("done");break;
+      case "NotDone": setFillter('notdone'); break;
+      case "All" : setFillter("all");break;
       default:
     }
   }
+  
 
-  return (
-    <div className="List">
+
+  return <div className="List">
       <header>
         <h1>To-Do-List</h1>
         <input
@@ -49,23 +47,10 @@ const AddTask = () => {
         <select className="filter" name="filter" onChange={filterTask}>
           <option value="All">All</option>
           <option value="Done">Done</option>
+          <option value="NotDone">Not Done</option>
         </select>
       </header>
-      {fillter
-        ? items
-            .filter((el) => el.isDone === true)
-            .map(
-              (el) =>
-                el.description !== "" && (
-                  <Task
-                    id={el.id}
-                    key={el.id}
-                    desc={el.description}
-                    dn={el.isDone}
-                  />
-                )
-            )
-        : items.map(
+      {fillter==="done"? items.filter(el => el.isDone === true).map(
             (el) =>
               el.description !== "" && (
                 <Task
@@ -73,11 +58,29 @@ const AddTask = () => {
                   key={el.id}
                   desc={el.description}
                   dn={el.isDone}
-                />
-              )
-          )}
+                />))
+                :
+            fillter ==="notdone"?  items.filter(el => el.isDone === false).map(
+              (el) =>
+                el.description !== "" && (
+                  <Task
+                    id={el.id}
+                    key={el.id}
+                    desc={el.description}
+                    dn={el.isDone}
+                  />))
+                : items.map((el) =>
+                el.description !== "" && (
+                  <Task
+                    id={el.id}
+                    key={el.id}
+                    desc={el.description}
+                    dn={el.isDone}
+                  />))   
+          
+                }
     </div>
-  );
-};
+  
+}
 
 export default AddTask;
